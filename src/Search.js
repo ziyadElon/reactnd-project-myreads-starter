@@ -12,21 +12,25 @@ class Search extends Component {
 	filterSearchResults = (e) => {
 		let searchTerm = e.target.value;
 		this.setState({ query: searchTerm });
-		if(this.searchTerms.includes(this.state.query)){
+		console.log(this.state);
+		//if(this.searchTerms.includes(this.state.query)){
 			BooksAPI.search(this.state.query)
 			.then((bookList) => {
-				let newList = bookList.map((book) => {
-					book.shelf = 'none';	
-					return book;			
-				});
-				this.setState({ books: newList});
+				if(bookList) {
+					let newList = bookList.map((book) => {
+						book.shelf = 'none';
+						return book;
+					});
+					this.setState({ books: newList });
+				}
 			});
-		}
+	//	}
 	}
 
 	searchTerms = ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS']
 
 	render() {
+		console.log(this.state.books);
 		return (
 			<div className="search-books">
 				<div className="search-books-bar">

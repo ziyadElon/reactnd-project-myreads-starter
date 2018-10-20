@@ -12,6 +12,17 @@ class BooksApp extends React.Component {
     books : []
   }
 
+  addNewBooks = (book, shelf) => {
+    book.shelf = shelf;    
+    this.setState((state) => {
+    state.books.push(book);
+    console.log(state);
+      return {
+        books : state.books
+      }
+    });
+  }
+
   changeShelf = (book, value) => {
     this.setState((state) => {
       let newState = state.books.map((b) => {
@@ -28,6 +39,7 @@ class BooksApp extends React.Component {
   }
 
   filterBooks(books, shelf) {
+    console.log(books);
     return books.filter((book) => book.shelf.toLowerCase() === shelf);
   }
 
@@ -44,7 +56,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route path="/search" render={() => (
-          <Search books={this.state.books} changeShelf={this.changeShelf}/>
+          <Search books={this.state.books} changeShelf={this.addNewBooks}/>
         )} />
           
          <Route exact path="/" render={() => (

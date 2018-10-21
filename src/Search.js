@@ -12,11 +12,11 @@ class Search extends Component {
 	filterSearchResults = (e) => {
 		let libraryBooks = this.props.books;
 		let libraryBookTitles = this.props.books.map((book) => book.title);
-		let searchTerm = e.target.value.trim();
+		let searchTerm = e.target.value;
 		this.setState({ query: searchTerm });
 		this.clearSearchResults();
-		if(this.state.query){
-			BooksAPI.search(this.state.query.trim())
+		if(searchTerm.trim()){
+			BooksAPI.search(searchTerm.trim())
 			.then((bookList) => {
 				if(bookList.length > 0) {
 					let newList = bookList.map((book) => {
